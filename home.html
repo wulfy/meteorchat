@@ -1,0 +1,46 @@
+<!-- simple-todos.html -->
+<template name="home">
+	<div class="page home">
+		liste des rooms 
+		<br/>
+		{{> loginButtons}}
+      <!-- add a form below the h1 -->
+      {{#if currentUser}}
+		<form class="new-room">
+	    	<input type="text" name="text" placeholder="Type to add new room" />
+	   </form>
+	   {{/if}}
+		<ul>
+	      {{#each rooms}}
+	        {{> roomItem}}
+	      {{/each}}
+	    </ul>
+	</div>
+</template>
+
+<template name="roomItem">
+	<li><a href="{{pathFor 'room'}}">{{name}}</a></li>
+</template>
+
+<template name="room">
+	<div class="page Room">
+		Room {{name}} (owner: {{username}})
+		<br/>
+		{{> loginButtons}}
+      <!-- add a form below the h1 -->
+      {{#if currentUser}}
+		<form class="new-message">
+	    	<input type="text" name="text" placeholder="Type to send message" />
+	   </form>
+	   {{/if}}
+		<ul>
+	        {{#each messages}}
+	        	{{> message}}
+	        {{/each}}
+	    </ul>
+	</div>
+</template>
+
+<template name="message">
+	<li  style="{{#if isCurrentUser userid}} color:blue;{{else}} color:black; {{/if}}"  > {{createdAt}} {{username}} - {{text}}</li>
+</template>
