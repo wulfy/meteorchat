@@ -19,28 +19,45 @@
 </template>
 
 <template name="roomItem">
-	<li><a href="{{pathFor 'room'}}">{{name}}</a></li>
+	<li><a href="{{pathFor 'room'}}">{{name}}</a> <i>({{nbconnected}})</i></li>
 </template>
 
 <template name="room">
 	<div class="page Room">
-		Room {{name}} (owner: {{username}})
+
+		Room {{name}} {{_id}} (owner: {{username}}) -  <i>{{nbUsers}} connected</i>
 		<br/>
 		{{> loginButtons}}
       <!-- add a form below the h1 -->
-      {{#if currentUser}}
+     
+
+	   <div id="users" class="users">
+			{{#each users}}
+	        	{{> user}}
+	        {{/each}}
+	    </div>
+	    <div id="messages" class="messages">
+			<ul>
+		        {{#each messages}}
+		        	{{> message}}
+		        {{/each}}
+		    </ul>
+		</div>
+
+		{{#if currentUser}}
 		<form class="new-message">
-	    	<input type="text" name="text" placeholder="Type to send message" />
+	    	<input type="text" name="text" placeholder="Type to send message" class="sendmessage"/>
 	   </form>
 	   {{/if}}
-		<ul>
-	        {{#each messages}}
-	        	{{> message}}
-	        {{/each}}
-	    </ul>
+
 	</div>
 </template>
 
 <template name="message">
 	<li  style="{{#if isCurrentUser userid}} color:blue;{{else}} color:black; {{/if}}"  > {{createdAt}} {{username}} - {{text}}</li>
+</template>
+
+<template name="user">
+	<b>Connected users</b>  <br/><br/>
+	name: {{username}} > {{idle}} {{#if isActiveuser}} active {{else}} <i>IDLE</i> {{/if}} <br/>
 </template>

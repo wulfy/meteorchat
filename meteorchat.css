@@ -1,1 +1,36 @@
 /* CSS declarations go here */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.left{
+	float:left;
+}
+
+
+.users{
+	position: absolute;
+	left:800px;
+	top:120px;
+	width: 300px;
+	background-color: #e4edf4;
+	height: 400px;
+	text-align: center;
+}
+
+.messages{
+	position: absolute;
+	left:0px;
+	top:120px;
+	width: 800px;
+	background-color: rgb(235, 235, 235);
+	height: 400px;
+}
+
+.sendmessage{
+	position: absolute;
+	width: 800px;
+	top:530px;
+	height: 50px;
+}

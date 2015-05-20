@@ -12,6 +12,7 @@ Router.map(function() {
 HomeController = RouteController.extend({
   onBeforeAction: function() {
     Meteor.subscribe('listRooms');
+    Meteor.subscribe('userStatus');
     this.next();
   }
 });
@@ -24,11 +25,12 @@ RoomController = RouteController.extend({
   	//en gros le client souscrit à des données qui lui seront envoyées par le serveur. Si ce n'est pas le cas , il ne reçoit rien.
     Meteor.subscribe('roomData', this.params._id);
     Meteor.subscribe('roomMessages', this.params._id);
+    Meteor.subscribe('userStatus');
     this.next();
   },
   //permet d'envoyer les données directement dans le template (ainsi on peut utiliser "name" de l'objet room présent en BDD)
   data: function() {
-  	console.log(ChatsRooms.findOne(this.params._id));
+
     return ChatsRooms.findOne(this.params._id);
   },
     /*action: function () {
